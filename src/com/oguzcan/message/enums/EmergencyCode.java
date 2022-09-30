@@ -1,6 +1,6 @@
-package com.oguzcan;
+package com.oguzcan.message.enums;
 
-import static com.oguzcan.DepartmentCode.*;
+import static com.oguzcan.message.enums.DepartmentCode.*;
 
 public enum EmergencyCode {
 

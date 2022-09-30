@@ -1,21 +1,30 @@
 package com.oguzcan.subscriber;
 
-import com.oguzcan.EmergencyCode;
-import com.oguzcan.eventChannel.EmergencyService;
+import com.oguzcan.eventChannel.EmergencyServices;
+import com.oguzcan.message.Notification;
+import com.oguzcan.message.enums.DepartmentCode;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public abstract class Subscriber {
 
-    public final EmergencyService emergencyService;
-    protected EmergencyCode currentTask;
+    protected final DepartmentCode departmentCode;
+    protected Queue<Notification> notifications = new LinkedList<>();
 
-    public Subscriber(EmergencyCode emergencyCode) {
-        emergencyService = EmergencyService.getInstance();
-        this.currentTask = emergencyCode;
+    protected EmergencyServices emergencyServices = EmergencyServices.getInstance();
+
+    public Subscriber(DepartmentCode departmentCode) {
+        this.departmentCode = departmentCode;
         subscribe();
     }
 
+    public void addNotification(Notification notification) {
+        notifications.add(notification);
+    }
+
     public void subscribe() {
-        emergencyService.addSubscriber(this);
+        emergencyServices.addSubscriber(departmentCode, this);
     }
 
     public abstract void work();

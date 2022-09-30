@@ -1,8 +1,8 @@
 package com.oguzcan.publisher;
 
-import com.oguzcan.Emergency;
+import com.oguzcan.message.Emergency;
 
 public interface Publisher {
-    void addEmergency(Emergency emergency);
-    void publishEvent();
+
+    void publishEmergency(Emergency emergency);
 }

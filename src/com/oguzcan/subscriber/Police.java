@@ -1,19 +1,23 @@
 package com.oguzcan.subscriber;
 
-import com.oguzcan.EmergencyCode;
+import com.oguzcan.message.Notification;
+import com.oguzcan.message.enums.DepartmentCode;
 
 public class Police extends Subscriber{
 
-    public Police(EmergencyCode emergencyCode) {
-        super(emergencyCode);
+    public Police() {
+        super(DepartmentCode.POLICE);
     }
 
+    @Override
     public void work() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("[%s:%s]\t", currentTask, currentTask.getDescription()))
-                .append("Polis ekipleri yola çıktı.");
-        System.out.println(sb);
+        if (!notifications.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            Notification notification = notifications.remove();
+            sb.append(notification).append(": Polis kuvvetleri harekete geçti -> ").append(notification.getLocation());
+            System.out.println(sb);
+        } else {
+            System.out.println("[Polis]:\tHerhangi bir ihbar bulunmamaktadır.");
+        }
     }
-
 }

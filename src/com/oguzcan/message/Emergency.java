@@ -1,4 +1,6 @@
-package com.oguzcan;
+package com.oguzcan.message;
+
+import com.oguzcan.message.enums.EmergencyCode;
 
 import java.util.HashSet;
 
@@ -52,13 +54,15 @@ public class Emergency {
         return emergencyCodes;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(emergencyId).append(": ")
-                .append(fullName)
-                .append(" -> ")
-                .append(location);
+                .append(fullName);
 
         return sb.toString();
     }

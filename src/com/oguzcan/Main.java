@@ -1,5 +1,7 @@
 package com.oguzcan;
 
+import com.oguzcan.message.Emergency;
+import com.oguzcan.message.enums.EmergencyCode;
 import com.oguzcan.publisher.Person;
 import com.oguzcan.publisher.Ship;
 
@@ -15,7 +17,7 @@ public class Main {
                 .addEmergencyCode(EmergencyCode.RED)
                 .addEmergencyCode(EmergencyCode.SILVER).build();
 
-        person.addEmergency(emergency);
+        person.publishEmergency(emergency);
 
         System.out.println("\n");
 
@@ -24,6 +26,6 @@ public class Main {
                 .setFullName("Zeynep")
                 .setLocation("Mars")
                 .addEmergencyCode(EmergencyCode.BLUE).build();
-        ship.addEmergency(emergency2);
+        ship.publishEmergency(emergency2);
     }
 }
