@@ -10,11 +10,11 @@ public class Main {
     public static void main(String[] args) {
         Person person = new Person();
 
-        // Create emergency
+        // Banka soygunu
         Emergency emergency = new Emergency.Builder()
                 .setFullName("Oğuzcan")
                 .setLocation("Avcılar")
-                .addEmergencyCode(EmergencyCode.RED)
+                .addEmergencyCode(EmergencyCode.BLUE)
                 .addEmergencyCode(EmergencyCode.SILVER).build();
 
         person.publishEmergency(emergency);
@@ -22,10 +22,11 @@ public class Main {
         System.out.println("\n");
 
         Ship ship = new Ship();
+        // Yangın
         Emergency emergency2 = new Emergency.Builder()
                 .setFullName("Zeynep")
                 .setLocation("Mars")
-                .addEmergencyCode(EmergencyCode.BLUE).build();
+                .addEmergencyCode(EmergencyCode.RED).build();
         ship.publishEmergency(emergency2);
     }
 }

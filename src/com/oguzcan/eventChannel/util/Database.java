@@ -15,7 +15,4 @@ public class Database {
     public void getSubscriber(DepartmentCode departmentCode) {
         subscriberFactory.getSubscriber(departmentCode);
     }
-
-
-
 }

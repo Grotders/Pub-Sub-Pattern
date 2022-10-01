@@ -8,8 +8,8 @@ import com.oguzcan.subscriber.Subscriber;
 
 public class SubscriberFactory {
 
+    // Factory Pattern
     public Subscriber getSubscriber(DepartmentCode departmentCode) {
-
         if (departmentCode == DepartmentCode.MEDICAL) {
             return new Hospital();
         } else if(departmentCode == DepartmentCode.FIRE) {
