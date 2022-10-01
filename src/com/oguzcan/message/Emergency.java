@@ -7,9 +7,9 @@ import java.util.HashSet;
 public class Emergency {
 
     private static int NEXT_EMERGENCY_ID = 1;
-
     private int emergencyId;
-    private HashSet<EmergencyCode> emergencyCodes = new HashSet<>();
+
+    private HashSet<EmergencyCode> emergencyCodes;
 
     private String fullName;
     private String location;

@@ -10,12 +10,10 @@ public class SubscriberFactory {
 
     // Factory Pattern
     public Subscriber getSubscriber(DepartmentCode departmentCode) {
-        if (departmentCode == DepartmentCode.MEDICAL) {
-            return new Hospital();
-        } else if(departmentCode == DepartmentCode.FIRE) {
-            return new FireDepartment();
-        } else if(departmentCode == DepartmentCode.POLICE) {
-            return new Police();
+        switch (departmentCode) {
+            case MEDICAL -> new Hospital();
+            case POLICE -> new Police();
+            case FIRE -> new FireDepartment();
         }
         return null;
     }

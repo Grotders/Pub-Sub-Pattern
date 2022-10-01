@@ -33,7 +33,9 @@ public class EmergencyServices implements EventChannel{
     }
 
     @Override
-    public void addSubscriber(DepartmentCode departmentCode ,Subscriber subscriber) {
+    public void addSubscriber(Subscriber subscriber) {
+        DepartmentCode departmentCode = subscriber.getDepartmentCode();
+
         Set<Subscriber> subscribers = isDepartmentCodeAvailable(departmentCode) ?
                 subscribersDepartmentMap.get(departmentCode) : new HashSet<>();
 
@@ -42,7 +44,9 @@ public class EmergencyServices implements EventChannel{
     }
 
     @Override
-    public void removeSubscriber(DepartmentCode departmentCode ,Subscriber subscriber) {
+    public void removeSubscriber(Subscriber subscriber) {
+        DepartmentCode departmentCode = subscriber.getDepartmentCode();
+
         if (isDepartmentCodeAvailable(departmentCode)) {
             Set<Subscriber> subscribers = subscribersDepartmentMap.get(departmentCode);
             subscribers.remove(subscriber);
@@ -57,6 +61,13 @@ public class EmergencyServices implements EventChannel{
         broadcast();
     }
 
+    private Notification emergencyCodeToNotification(EmergencyCode emergencyCode, String location) {
+        return new Notification.Builder()
+                .setLocation(location)
+                .setEmergencyCode(emergencyCode)
+                .build();
+    }
+
     @Override
     public void broadcast() {
         while (!emergenciesQueue.isEmpty()) {
@@ -66,26 +77,21 @@ public class EmergencyServices implements EventChannel{
             System.out.println(emergency);
 
             for (EmergencyCode emergencyCode : emergencyCodes) {
-                Notification notification = new Notification.Builder()
-                        .setLocation(emergency.getLocation())
-                        .setEmergencyCode(emergencyCode)
-                        .build();
+                Notification notification = emergencyCodeToNotification(emergencyCode, emergency.getLocation());
 
-                notifySubscriber(notification);
+                notifySubscribers(notification);
             }
-
         }
-
-        commandToWorkForSubscriber();
+        commandToWorkForSubscribers();
     }
 
-    public void notifySubscriber(Notification notification) {
+    public void notifySubscribers(Notification notification) {
         Set<Subscriber> subscribers = subscribersDepartmentMap.get(notification.getDepartmentCode());
 
         subscribers.forEach(t -> t.addNotification(notification));
     }
 
-    public void commandToWorkForSubscriber() {
+    public void commandToWorkForSubscribers() {
         subscribersDepartmentMap.forEach((departmentCode, subscribers) -> {
             subscribers.forEach(t -> t.work());
         });

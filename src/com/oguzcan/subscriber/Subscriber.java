@@ -12,7 +12,7 @@ public abstract class Subscriber {
     protected final DepartmentCode departmentCode;
     protected Queue<Notification> notifications = new LinkedList<>();
 
-    protected EmergencyServices emergencyServices = EmergencyServices.getInstance();
+    protected final static EmergencyServices emergencyServices = EmergencyServices.getInstance();
 
     public Subscriber(DepartmentCode departmentCode) {
         this.departmentCode = departmentCode;
@@ -24,7 +24,11 @@ public abstract class Subscriber {
     }
 
     public void subscribe() {
-        emergencyServices.addSubscriber(departmentCode, this);
+        emergencyServices.addSubscriber(this);
+    }
+
+    public DepartmentCode getDepartmentCode() {
+        return departmentCode;
     }
 
     public abstract void work();

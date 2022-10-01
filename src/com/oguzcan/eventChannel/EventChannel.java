@@ -8,12 +8,12 @@ import com.oguzcan.subscriber.Subscriber;
 
 public interface EventChannel {
 
-    void addSubscriber(DepartmentCode departmentCode , Subscriber subscriber);
-    void removeSubscriber(DepartmentCode departmentCode ,Subscriber subscriber);
+    void addSubscriber(Subscriber subscriber);
+    void removeSubscriber(Subscriber subscriber);
 
     void addEmergency(Emergency emergency);
     void broadcast();
-    void notifySubscriber(Notification notification);
-    void commandToWorkForSubscriber();
+    void notifySubscribers(Notification notification);
+    void commandToWorkForSubscribers();
 
 }
